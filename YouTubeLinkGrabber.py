@@ -1,8 +1,7 @@
 import yt_dlp
 import os
 
-# Only channel - change URL if needed
-CHANNEL_URL = "https://www.youtube.com/@AlMayadeenNews"
+CHANNEL_URL = "https://www.youtube.com/@france24"
 
 def get_stream_url():
     try:
@@ -21,18 +20,15 @@ def get_stream_url():
         print(f"Error: {e}")
     return None
 
-# Create the file
 with open('youtube.m3u', 'w', encoding='utf-8') as f:
     f.write('#EXTM3U\n')
     stream_url = get_stream_url()
     if stream_url:
-        f.write('#EXTINF:-1 group-title="AlMayadeen", AlMayadeen TV\n')
+        f.write('#EXTINF:-1 group-title="News", France 24 Live\n')
         f.write(f'{stream_url}\n')
     else:
-        # If no live stream
-        f.write('#EXTINF:-1 group-title="AlMayadeen", AlMayadeen (Offline)\n')
+        f.write('#EXTINF:-1 group-title="News", France 24 (Offline)\n')
         f.write('https://example.com/offline.m3u8\n')
 
-# cleanup
 if 'temp.txt' in os.listdir():
     os.remove('temp.txt')
